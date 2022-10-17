@@ -11,6 +11,6 @@ public class ArticleTest extends TestBase {
         app.getArticle().createReadingList(20, "NewReadingList", 1);
         app.getArticle().close(3000);
         app.getArticle().selectFavourites(10);
-        // app.getArticle().removeArticleFromFavourites();
+        app.getArticle().removeArticleFromFavourites();
     }
 }

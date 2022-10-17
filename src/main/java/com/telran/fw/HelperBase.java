@@ -62,54 +62,18 @@ public class HelperBase {
         return driver.findElements(by).size() > 0;
     }
 
-    public void hideKeyboard(){
-        driver.hideKeyboard();
-    }
-
-    public void swipeUp() {
+    public void swipeRigthToLeft(By by) {
         TouchAction action = new TouchAction(driver);
         Dimension size = driver.manage().window().getSize();
-        int x = size.width / 2;
-        int startY = (int) (size.height*0.8);
-        int stopY = (int) (size.height*0.3);
-        action.longPress(PointOption.point(x,startY))
-                .moveTo(PointOption.point(x, stopY))
+        WebElement element = findElement(by);
+        int leftX = (int) (element.getLocation().getX()*0.3);
+        int rightX = (int) (leftX + element.getLocation().getX()*0.8);
+        int upperY = element.getLocation().getY();
+        int lowerY = upperY + element.getSize().getHeight();
+        int middleY = (upperY + lowerY)/2;
+        action.longPress(PointOption.point(rightX,middleY))
+                .moveTo(PointOption.point(leftX, middleY))
                 .release()
                 .perform();
     }
-
-    public void swipeDown() {
-        TouchAction action = new TouchAction(driver);
-        Dimension size = driver.manage().window().getSize();
-        int x = size.width / 2;
-        int startY = (int) (size.height*0.7);
-        int stopY = (int) (size.height*0.4);
-        action.longPress(PointOption.point(x,startY))
-                .moveTo(PointOption.point(x, stopY))
-                .release()
-                .perform();
-    }
-
-    public void moveFrom(By by, double from, double to){
-        TouchAction action = new TouchAction(driver);
-        Dimension size = driver.manage().window().getSize();
-        int upPoint = (int) (size.height*from);
-        int downPoint = (int) (size.height*to);
-        WebElement element = driver.findElement(by);
-        int leftX = element.getLocation().getX();
-        int rightX = leftX + element.getSize().getWidth();
-        int middleX = (leftX + rightX)/2;
-        action.longPress(PointOption.point(middleX,upPoint))
-                .moveTo(PointOption.point(middleX, downPoint))
-                .release()
-                .perform();
-    }
-
-    public void pressOnTimer(int x, int y) {
-        TouchAction action = new TouchAction(driver);
-        Dimension size = driver.manage().window().getSize();
-        action.tap(PointOption.point(x, y)).release().perform();
-    }
-
-
 }

@@ -32,4 +32,8 @@ public class ArticleHelper extends HelperBase{
         tap(By.xpath("//android.widget.FrameLayout[@content-desc='My lists']/android.widget.ImageView"));
         waitForElementAndTap(By.id("item_title"), time);
     }
+
+    public void removeArticleFromFavourites() {
+        swipeRigthToLeft(By.id("page_list_item-container"));
+    }
 }
